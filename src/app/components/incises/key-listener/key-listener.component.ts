@@ -24,7 +24,7 @@ export class KeyListenerComponent implements OnInit {
   }
   
   readKey(event: any){
-    if(this.authService.loggedIn() && document.getElementById('E').textContent){
+    if(this.authService.loggedIn() && this.inciseService.selectedIncise._id){
       if(event.keyCode === 13){   
         if(window.getSelection().toString() != ""){
           this.ToComment(window.getSelection());

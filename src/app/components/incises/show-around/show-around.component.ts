@@ -81,10 +81,10 @@ export class ShowAroundComponent implements OnInit {
   toCenter(incise: Incise){
     localStorage.setItem('byDefectIncise', incise._id);
     this.inciseService.selectedIncise = incise;
+    this.isEditable(incise);
     this.setVistas(incise);
     this.resetConstants();
     this.setImageInc(incise);
-    this.isEditable(incise);
     this.setDiamond(incise);
     this.setAnchor(incise);
     this.setImage(incise);

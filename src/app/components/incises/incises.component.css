@@ -478,3 +478,15 @@
 }
 
 
+.landing{
+  height: 450px;
+  font-size: xx-large;
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+}
+
+.innerLanding{
+  height: 300px;
+  width: 350px;
+}

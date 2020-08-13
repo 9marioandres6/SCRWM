@@ -28,6 +28,7 @@
                                 {{ lastEdited(task.incise.updatedAt) }} (cr. {{ created(task.incise.createdAt) }} )
                             </div>
                             <div class="puntos">
+                                <i class="material-icons" style="color: orangered;" (click)="OpendialogDelInc(task.incise)">delete</i>
                                 <p class="vistas">{{ task.incise.vistas }} </p> 
                                 <img class="ojo" id="ojo" src="assets/vista.png">
                                 <p class="followers">{{ task.incise.diamond }} </p>    
@@ -63,6 +64,7 @@
                             {{ lastEdited(task.incise.updatedAt) }} (cr. {{ created(task.incise.createdAt) }} )
                         </div>
                         <div class="cab">
+                            <i class="material-icons" style="color: orangered;" (click)="OpendialogDelInc(task.incise)">delete</i>
                             <p class="vistas">{{ task.incise.vistas }} </p> 
                             <img class="ojo" id="ojo" src="assets/vista.png">
                             <p class="followers">{{ task.incise.diamond }} </p>    

@@ -10,12 +10,18 @@ import { SignupComponent } from 'src/app/components/signup/signup.component';
 import { SigninComponent } from 'src/app/components/signin/signin.component';
 import { ProfComponent } from 'src/app/components/prof/prof.component';
 import { ListComponent } from 'src/app/components/list/list.component';
-import { TasksComponent } from 'src/app/components/tasks/tasks.component';
+import { TasksComponent, DialogNewScrwm } from 'src/app/components/tasks/tasks.component';
 import { IncisesComponent } from 'src/app/components/incises/incises.component';
 
 import {MatDialog} from '@angular/material/dialog';
 
 declare var M: any;
+
+document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('.tooltipped');
+  var instances = M.Tooltip.init(elems);
+});
+
 
 @Component({
   selector: 'app-init',
@@ -33,6 +39,7 @@ export class InitComponent implements OnInit {
     public dialog: MatDialog,
     private signupComponent: SignupComponent,
     private signinComponent: SigninComponent,
+    public newScrwm: DialogNewScrwm,
     public profComponent: ProfComponent,
     public list: ListComponent,
     public taskComponent: TasksComponent,

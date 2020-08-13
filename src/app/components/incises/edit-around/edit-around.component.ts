@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InciseService } from 'src/app/services/incise.service';
 import { ShowAroundComponent } from 'src/app/components/incises/show-around/show-around.component'
+import { DialogDelInc } from 'src/app/components/tasks/tasks.component'
 import { Incise } from 'src/app/models/incise';
 import { Comm } from 'src/app/models/comm';
 
@@ -16,8 +17,9 @@ export class EditAroundComponent implements OnInit {
   dir: string;
 
   constructor(
-    public inciseService: InciseService, 
-    public showAround: ShowAroundComponent,
+    private inciseService: InciseService, 
+    private showAround: ShowAroundComponent,
+    private delInc: DialogDelInc,
   ){ }
 
   ngOnInit(): void {
@@ -56,7 +58,7 @@ export class EditAroundComponent implements OnInit {
     this.playAudio();
     const E = document.getElementById('E');
     if(E.textContent === "" && this.oldInc.content === "" && !this.oldInc.media){
-      this.inciseService.deleteIncise(this.oldInc._id).subscribe();
+      this.delInc.delIncise(this.oldInc);
       this.showAround.toCenter(this.newInc);
       return;
     }

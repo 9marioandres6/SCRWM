@@ -12,7 +12,7 @@ import { TokenInterceptorService } from './token-interceptor.service';
 import { IncisesComponent, DialogContent } from '../components/incises/incises.component';
 import { SignupComponent } from '../components/signup/signup.component';
 import { SigninComponent } from '../components/signin/signin.component';
-import { TasksComponent, DialogHeader, DialogNewScrwm } from '../components/tasks/tasks.component';
+import { TasksComponent, DialogHeader, DialogNewScrwm, DialogDelInc } from '../components/tasks/tasks.component';
 import { InitComponent } from '../components/init/init.component';
 import { ShowAroundComponent } from '../components/incises/show-around/show-around.component';
 import { EditAroundComponent } from '../components/incises/edit-around/edit-around.component';
@@ -44,6 +44,7 @@ import { ListComponent } from 'src/app/components/list/list.component';
     ProfComponent,
     ProfileComponent,
     ListComponent,
+    DialogDelInc,
     CopyUrlComponent, 
     NewImageComponent,
     ],
@@ -73,6 +74,7 @@ import { ListComponent } from 'src/app/components/list/list.component';
     CopyUrlComponent,
     InitComponent,
     TestingComponent,
+    DialogDelInc,
     ChatComponent,
     NewImageComponent,
     ListComponent,

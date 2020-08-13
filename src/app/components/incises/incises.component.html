@@ -1,7 +1,7 @@
 <div *ngIf="router.url === '/'; else maxIncise">
     <span>
         <div class="bloqueMin">
-            <div class="bloqueMin2">
+            <div class="bloqueMin2" *ngIf="inciseService.selectedIncise._id, else landing">
 
                 <div></div>
 
@@ -201,6 +201,11 @@
                 </div> 
 
             </div>
+            <ng-template #landing>
+                <div class="landing">
+                    <img class="innerLanding" src="assets/landing.png" alt="">
+                </div>
+            </ng-template>
         </div>    
     </span>
 </div>
