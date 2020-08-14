@@ -10,6 +10,8 @@ interface HTMLInputEvent extends Event {
   target: HTMLInputElement & EventTarget;
 }
 
+declare var M: any; 
+
 @Component({
   selector: 'app-new-image',
   templateUrl: './new-image.component.html',
@@ -84,4 +86,22 @@ export class NewImageComponent implements OnInit {
       }
     });
   }
+
+  removeImage(){
+    this.imageIncService.getImages().subscribe(res => {
+      let I = this.imageIncService.imagesInc = res as ImageInc[];
+      for(var i in I){
+        if(I[i].imagePath === this.showAround.ImageIncPath){
+          this.imageIncService.deleteImage(I[i]._id).subscribe(res => {
+            this.inciseService.selectedIncise.media = "";
+            this.showAround.toCenter(this.inciseService.selectedIncise);
+            M.toast({html: "Image removed"})
+            return;  
+          });
+        }
+      }
+    });
+  }
+
+
 }

@@ -2,3 +2,8 @@
     width: 400px;
     border-radius: 20px;
 }
+
+.buttons{
+    display: flex;
+    justify-content: space-between;
+}
