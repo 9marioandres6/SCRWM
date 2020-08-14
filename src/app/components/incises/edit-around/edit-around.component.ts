@@ -15,6 +15,7 @@ export class EditAroundComponent implements OnInit {
   newInc: Incise;
   oldInc: Incise;
   dir: string;
+  Sel: Incise;
 
   constructor(
     private inciseService: InciseService, 
@@ -205,7 +206,11 @@ export class EditAroundComponent implements OnInit {
   linkStereo3(){
     this.inciseService.putIncise(this.newInc).subscribe(res => {
       res as Incise;
-      this.showAround.toCenter(this.newInc);
+      if(this.Sel){
+        this.showAround.toCenter(this.Sel);
+      } else {
+        this.showAround.toCenter(this.newInc);
+      }
     })
   }
 

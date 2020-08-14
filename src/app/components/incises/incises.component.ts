@@ -83,19 +83,24 @@ export class IncisesComponent implements OnInit{
         if(C._id === Sel._id){
           M.toast({html: "It is not allowed to link an incise with itself"})
         } else if(window.getSelection().toString() !== ""){
-          document.getElementById('E').contentEditable = "false";
-          const comm = new Comm;
-          comm.commt = window.getSelection().toString().trim();
-          comm.initial = window.getSelection().getRangeAt(0).startOffset;
-          comm.final = window.getSelection().getRangeAt(0).endOffset;
-          comm.IdComm = this.inciseService.selectedIncise._id;
-
-          this.editAround.editAround(C, direction, comm);
+          this.editAround.Sel = Sel;
+          this.setComment(C, direction);
         } else {
+          this.editAround.Sel = Sel;
           this.editAround.editAround(C, direction);
         }
       }
     }
+  }
+
+  setComment(C: Incise, direction: string){
+    document.getElementById('E').contentEditable = "false";
+    const comm = new Comm;
+    comm.commt = window.getSelection().toString().trim();
+    comm.initial = window.getSelection().getRangeAt(0).startOffset;
+    comm.final = window.getSelection().getRangeAt(0).endOffset;
+    comm.IdComm = this.inciseService.selectedIncise._id;
+    this.editAround.editAround(C, direction, comm);
   }
 
   zoomMin(){
@@ -109,7 +114,7 @@ export class IncisesComponent implements OnInit{
       this.router.navigate(['/incises']);
       this.inciseService.selectedIncise.content = document.getElementById('E').textContent;
       this.showAround.toCenter(this.inciseService.selectedIncise); 
-      this.deleteIncises(); 
+      //this.deleteIncises(); 
     }
   }
 
