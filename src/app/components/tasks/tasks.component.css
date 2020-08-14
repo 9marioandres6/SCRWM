@@ -11,6 +11,7 @@
     margin-right: 5px;
     margin-top: 5px;
     width: 7000px;
+    align-items: flex-start;
 }
 
 ::-webkit-scrollbar {
@@ -30,6 +31,12 @@
 
 .mat-expansion-panel{
     margin-top: 5px;
+}
+
+.description{
+    width: 700px;
+    display: flex;
+    justify-content: left;
 }
 
 .mat-expansion-panel-header{
@@ -62,8 +69,7 @@
 }
 
 .circulo{
-    width: 40px;
-    height: 40px;
+    height: 38px;
     margin-top: 5px;
     margin-left: -20px;
     border-radius: 12px;
@@ -156,4 +162,14 @@
     display: flex;
     flex-direction: row-reverse;
     margin-top: 2px;
+}
+
+.imageTask{
+    height: 40px;
+}
+
+.imageTask{
+    margin-left: 20px;
+    margin-top: 3px;
+    border-radius: 3px;
 }

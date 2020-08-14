@@ -51,8 +51,11 @@ export class NewImageComponent implements OnInit {
     }
   }
 
+  cont: string;
+
   insertImageInc(){
     if(this.photoSel){
+      this.cont = document.getElementById('E').textContent;
       this.imageIncService.getImages().subscribe(res => {
         const A = this.imageIncService.imagesInc = res as ImageInc[];
         for(var i in A){
@@ -80,6 +83,7 @@ export class NewImageComponent implements OnInit {
       for(var i in A){
         if(A[i].associatedIncId = this.inciseService.selectedIncise._id){
           this.imageIncService.selectedImageInc = A[i];
+          this.inciseService.selectedIncise.content = this.cont;
           this.showAround.toCenter(this.inciseService.selectedIncise);
           return
         }

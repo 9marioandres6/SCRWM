@@ -128,7 +128,7 @@
                             <div></div>
                         </div>
                         <ng-container *ngIf="showAround.ImageIncPath">
-                            <img class="media" [src]="inciseService.env + showAround.ImageIncPath">
+                            <img class="media" [src]="inciseService.env + showAround.ImageIncPath" (click)="toBase64()">
                         </ng-container>
                     </div>
                 </div>

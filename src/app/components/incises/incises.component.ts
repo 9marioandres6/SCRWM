@@ -57,6 +57,12 @@ export class IncisesComponent implements OnInit{
     this.keyListener.readKey(event);
   }
 
+  toBase64(){
+    const img = this.inciseService.env + this.showAround.ImageIncPath;
+    console.log(img);
+  }
+
+
   allowDrop(event: any){
     event.preventDefault();
   }

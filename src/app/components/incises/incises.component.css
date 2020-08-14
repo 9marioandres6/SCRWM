@@ -452,7 +452,7 @@
     border-radius: 6px;
     padding: 5px 0;
     opacity: 0;
-    transition: opacity 1s;    
+    transition: opacity 3s;    
     position: absolute;
     top: -5px;
     right: 100%;
@@ -471,10 +471,12 @@
     box-shadow: 8px 8px 8px 2px  white inset, -8px -8px 8px 2px   white inset;
     cursor: pointer;
     margin-left: 5px;
+    opacity: 0;
+    transition: opacity 1s; 
 }
 
 .btn:hover{
-    background-color: #a1887f;
+    opacity: 1;
 }
 
 
