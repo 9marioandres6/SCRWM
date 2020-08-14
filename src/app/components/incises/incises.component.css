@@ -490,3 +490,17 @@
   height: 300px;
   width: 350px;
 }
+
+.link{
+  height: 15px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  opacity: 0.1;
+  transition: opacity 0.5s;
+}
+
+.link:hover{
+  opacity: 1;
+}

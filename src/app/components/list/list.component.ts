@@ -130,7 +130,7 @@ export class ListComponent implements OnInit {
         }
       }
     }
-  this.filterOwns(unfilteredList);
+  this.filterOwns(unfilteredList.sort().reverse());
   }
 
   filterOwns(unfilteredList: any[]){

@@ -28,6 +28,7 @@ export class TasksComponent implements OnInit {
   panelOpenState = false;
   taskList: Scrwm[];
   UserId = sessionStorage.getItem('currentUserId');
+  dragged: Incise;
 
   constructor(
     public inciseService: InciseService,
@@ -44,7 +45,11 @@ export class TasksComponent implements OnInit {
   procesaPropagar(event: any){
     this.taskList = event
   }
-  
+
+  drag(incise: Incise){
+    this.dragged = incise;
+  }
+
   lastEdited(updatedAt: string){
     return moment(updatedAt).startOf('hour').fromNow();
   }

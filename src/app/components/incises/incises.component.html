@@ -5,7 +5,10 @@
 
                 <div></div>
 
-                <div class="Arriba">
+                <div class="Arriba" (dragover)="allowDrop($event)"
+                                    (dragenter)="dragEnter($event)" 
+                                    (dragleave)="dragLeave($event)"
+                                    (drop)="drop($event, 'Up')">
                     <div *ngFor="let incise of showAround.Above">
                         <div class="ttpArr">
                             <div class="ArribaInc" (click)="editAround.editAround(incise, '*')"> {{ incise.content }}
@@ -47,7 +50,10 @@
                     </ng-container>
                 </div>
 
-                <div class="Izquierda">
+                <div class="Izquierda" (dragover)="allowDrop($event)"
+                                       (dragenter)="dragEnter($event)" 
+                                       (dragleave)="dragLeave($event)"
+                                       (drop)="drop($event, 'Left')">
                     <div *ngFor="let incise of showAround.Left">
                         <div class="ttpIzq">
                             <div class="IzquierdaInc" (click)="editAround.editAround(incise, '*')"> {{ incise.content }}
@@ -119,14 +125,19 @@
                         </ng-container>  
                     </div>
                     <div class="CeditableMin">
-                        <div id="E"></div>
+                        <div id="E">
+                            <div></div>
+                        </div>
                         <ng-container *ngIf="showAround.ImageIncPath">
                             <img class="media" [src]="inciseService.env + showAround.ImageIncPath">
                         </ng-container>    
                     </div> 
                 </div>
 
-                <div class="Derecha">
+                <div class="Derecha" (dragover)="allowDrop($event)"
+                                     (dragenter)="dragEnter($event)" 
+                                     (dragleave)="dragLeave($event)"
+                                     (drop)="drop($event, 'Right')">
                     <div *ngFor="let incise of showAround.Right">
                         <div class="ttpDer">
                             <div class="DerechaInc" (click)="editAround.editAround(incise, '*')"> 
@@ -160,7 +171,10 @@
 
                 <div></div>
 
-                <div class="Abajo">
+                <div class="Abajo" (dragover)="allowDrop($event)"
+                                   (dragenter)="dragEnter($event)" 
+                                   (dragleave)="dragLeave($event)"
+                                   (drop)="drop($event, 'Down')">
                     <div *ngFor="let incise of showAround.Below">
                         <div class="ttpAbj">
                             <div class="AbajoInc" (click)="editAround.editAround(incise, '*')"> {{ incise.content }}

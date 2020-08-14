@@ -14,9 +14,11 @@ import { KeyListenerComponent } from 'src/app/components/incises/key-listener/ke
 import { CopyUrlComponent } from 'src/app/components/incises/copy-url/copy-url.component';
 import { NewImageComponent } from 'src/app/components/incises/new-image/new-image.component';
 import { ProfileComponent } from 'src/app/components/profile/profile.component';
+import { TasksComponent } from 'src/app/components/tasks/tasks.component';
 
 import { ImageInc } from 'src/app/models/image-inc';
 import { Incise } from 'src/app/models/incise';
+import { Comm } from 'src/app/models/comm';
 
 import {MatDialog} from '@angular/material/dialog';
 
@@ -42,6 +44,7 @@ export class IncisesComponent implements OnInit{
     public showAround: ShowAroundComponent,
     private keyListener: KeyListenerComponent,
     public profileComponent: ProfileComponent,
+    public taskComponent: TasksComponent,
     public dialog: MatDialog,
     public router: Router,
     private route: ActivatedRoute,
@@ -52,6 +55,47 @@ export class IncisesComponent implements OnInit{
   
   @HostListener("window:keydown", ['$event']) spaceEvent(event: any){
     this.keyListener.readKey(event);
+  }
+
+  allowDrop(event: any){
+    event.preventDefault();
+  }
+
+  dragEnter(event: any){
+    if(event.target.className == "Arriba" || "ArribaInc" || "Izquierda" || "IzquierdaInc" || "Derecha" || "DerechaInc" || "Abajo" || "AbajoInc"){
+      event.target.style.backgroundColor = 'rgba(143, 174, 195, 0.2)';
+      event.target.style.borderRadius = "12px";
+    }
+  }
+
+  dragLeave(event: any){
+    if(event.target.className == "Arriba" || "ArribaInc" || "Izquierda" || "IzquierdaInc" || "Derecha" || "DerechaInc" || "Abajo" || "AbajoInc"){
+      event.target.style.backgroundColor = "";
+    }
+  }
+
+  drop(event: any, direction: string){
+    event.target.style.backgroundColor = "";
+    if(this.authService.loggedIn()){
+      let C = this.taskComponent.dragged;
+      const Sel = this.inciseService.selectedIncise
+      if(C && Sel._id){
+        if(C._id === Sel._id){
+          M.toast({html: "It is not allowed to link an incise with itself"})
+        } else if(window.getSelection().toString() !== ""){
+          document.getElementById('E').contentEditable = "false";
+          const comm = new Comm;
+          comm.commt = window.getSelection().toString().trim();
+          comm.initial = window.getSelection().getRangeAt(0).startOffset;
+          comm.final = window.getSelection().getRangeAt(0).endOffset;
+          comm.IdComm = this.inciseService.selectedIncise._id;
+
+          this.editAround.editAround(C, direction, comm);
+        } else {
+          this.editAround.editAround(C, direction);
+        }
+      }
+    }
   }
 
   zoomMin(){
@@ -65,7 +109,7 @@ export class IncisesComponent implements OnInit{
       this.router.navigate(['/incises']);
       this.inciseService.selectedIncise.content = document.getElementById('E').textContent;
       this.showAround.toCenter(this.inciseService.selectedIncise); 
-      //this.deleteIncises(); 
+      this.deleteIncises(); 
     }
   }
 
@@ -130,6 +174,10 @@ export class IncisesComponent implements OnInit{
       document.getElementById('anchor').style.opacity = "1";
       this.profService.putProf(this.profService.userProf).subscribe();
     }  
+  }
+
+  link(direction: string){
+    alert("link");
   }
 
   deleteIncises(){
