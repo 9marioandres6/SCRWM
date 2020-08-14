@@ -5,7 +5,7 @@
             <div *ngFor="let task of taskList">
                 <div *ngIf="task.incise.title, else noTitle">
                     <mat-expansion-panel hideToggle>
-                        <mat-expansion-panel-header>
+                        <mat-expansion-panel-header  >
                             <mat-panel-title >
                                 <div class="tooltip">
                                     <img class="circulo" *ngIf="task.image.imagePath, else defaultImage" [src]="authService.env + task.image.imagePath">
@@ -19,8 +19,8 @@
                                     </div>
                                 </div>  
                             </mat-panel-title>
-                            <mat-panel-description>
-                                <p class="title" (click)="showAround.saveLast(task.incise)">{{ task.incise.title }}  </p>
+                            <mat-panel-description draggable="true" (dragstart)="drag(task.incise)" (click)="showAround.saveLast(task.incise)">
+                                <p class="title">{{ task.incise.title }}  </p>
                             </mat-panel-description>
                         </mat-expansion-panel-header>
                         <div class="date">
@@ -28,6 +28,7 @@
                                 {{ lastEdited(task.incise.updatedAt) }} (cr. {{ created(task.incise.createdAt) }} )
                             </div>
                             <div class="puntos">
+                                <i class="material-icons" style="color: brown;" (click)="OpendialogDelInc(task.incise)">delete</i>
                                 <p class="vistas">{{ task.incise.vistas }} </p> 
                                 <img class="ojo" id="ojo" src="assets/vista.png">
                                 <p class="followers">{{ task.incise.diamond }} </p>    
@@ -55,14 +56,15 @@
                                     </div>
                                 </div>  
                             </mat-panel-title>
-                            <mat-panel-description>
-                                <p class="content" (click)="showAround.toCenter(task.incise)">{{ task.incise.content }}  </p>
+                            <mat-panel-description draggable="true" (dragstart)="drag(task.incise)" (click)="showAround.toCenter(task.incise)">
+                                <p class="content">{{ task.incise.content }}  </p>
                             </mat-panel-description>
                         </mat-expansion-panel-header>
                         <div class="date">
                             {{ lastEdited(task.incise.updatedAt) }} (cr. {{ created(task.incise.createdAt) }} )
                         </div>
                         <div class="cab">
+                            <i class="material-icons" style="color: orangered;" (click)="OpendialogDelInc(task.incise)">delete</i>
                             <p class="vistas">{{ task.incise.vistas }} </p> 
                             <img class="ojo" id="ojo" src="assets/vista.png">
                             <p class="followers">{{ task.incise.diamond }} </p>    

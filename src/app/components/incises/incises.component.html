@@ -5,7 +5,10 @@
 
                 <div></div>
 
-                <div class="Arriba">
+                <div class="Arriba" (dragover)="allowDrop($event)"
+                                    (dragenter)="dragEnter($event)" 
+                                    (dragleave)="dragLeave($event)"
+                                    (drop)="drop($event, 'Up')">
                     <div *ngFor="let incise of showAround.Above">
                         <div class="ttpArr">
                             <div class="ArribaInc" (click)="editAround.editAround(incise, '*')"> {{ incise.content }}
@@ -47,7 +50,10 @@
                     </ng-container>
                 </div>
 
-                <div class="Izquierda">
+                <div class="Izquierda" (dragover)="allowDrop($event)"
+                                       (dragenter)="dragEnter($event)" 
+                                       (dragleave)="dragLeave($event)"
+                                       (drop)="drop($event, 'Left')">
                     <div *ngFor="let incise of showAround.Left">
                         <div class="ttpIzq">
                             <div class="IzquierdaInc" (click)="editAround.editAround(incise, '*')"> {{ incise.content }}
@@ -81,7 +87,6 @@
              
                 <div class="center">
                     <div class="cab">
-
                         <ng-container *ngIf="authService.loggedIn()">
                             <div class="ttpBefore" *ngIf="inciseService.selectedIncise.before != ''">
                                 <img class="z-axis" (click)="editAround.setBefore()" src="assets/undo.png" >
@@ -119,14 +124,25 @@
                         </ng-container>  
                     </div>
                     <div class="CeditableMin">
-                        <div id="E"></div>
+                        <div id="E">
+                            <div></div>
+                        </div>
                         <ng-container *ngIf="showAround.ImageIncPath">
                             <img class="media" [src]="inciseService.env + showAround.ImageIncPath">
-                        </ng-container>    
-                    </div> 
+                        </ng-container>
+                    </div>
                 </div>
 
-                <div class="Derecha">
+                <div *ngIf="!inciseService.selectedIncise._id">
+                    <div class="landing">
+                        <img class="innerLanding" src="assets/landing.png" alt="">
+                    </div>
+                </div>
+
+                <div class="Derecha" (dragover)="allowDrop($event)"
+                                     (dragenter)="dragEnter($event)" 
+                                     (dragleave)="dragLeave($event)"
+                                     (drop)="drop($event, 'Right')">
                     <div *ngFor="let incise of showAround.Right">
                         <div class="ttpDer">
                             <div class="DerechaInc" (click)="editAround.editAround(incise, '*')"> 
@@ -160,7 +176,10 @@
 
                 <div></div>
 
-                <div class="Abajo">
+                <div class="Abajo" (dragover)="allowDrop($event)"
+                                   (dragenter)="dragEnter($event)" 
+                                   (dragleave)="dragLeave($event)"
+                                   (drop)="drop($event, 'Down')">
                     <div *ngFor="let incise of showAround.Below">
                         <div class="ttpAbj">
                             <div class="AbajoInc" (click)="editAround.editAround(incise, '*')"> {{ incise.content }}
@@ -288,18 +307,19 @@
              
                 <div class="center">
                     <div class="cab">
-                        <div class="ttpBefore" *ngIf="inciseService.selectedIncise.before != ''">
-                            <img class="z-axis" (click)="editAround.setBefore()" src="assets/undo.png" >
-                            <span class="ttpTextBefore"> Previous </span>
-                        </div>
-                        <div class="ttpAfter" *ngIf="inciseService.selectedIncise.after != ''">
-                            <img class="z-axis" (click)="editAround.setAfter()" src="assets/redo.png">
-                            <span class="ttpTextAfter"> E </span>
-                        </div>
                         <ng-container *ngIf="authService.loggedIn()">
+                            <div class="ttpBefore" *ngIf="inciseService.selectedIncise.before != ''">
+                                <img class="z-axis" (click)="editAround.setBefore()" src="assets/undo.png" >
+                                <span class="ttpTextBefore"> Previous </span>
+                            </div>
+                            <div class="ttpAfter" *ngIf="inciseService.selectedIncise.after != ''">
+                                <img class="z-axis" (click)="editAround.setAfter()" src="assets/redo.png">
+                                <span class="ttpTextAfter"> Edited </span>
+                            </div>                              <img class="anchor" id="anchor" src="assets/anchor.png" (mouseup)="anchorSelected()">
                             <img class="diamond" id="diamond" src="assets/diamond.png" (mouseup)="diamondSelected()">
                             <div class="followers">{{ inciseService.selectedIncise.diamond }} </div>    
-                            <img class="anchor" id="anchor" src="assets/anchor.png" (mouseup)="anchorSelected()">
+                            <img class="ojo" id="ojo" src="assets/vista.png">
+                            <div class="vistas">{{ inciseService.selectedIncise.vistas }} </div>  
                             <div class="ttpName">
                             <img class="circulo" (click)="profileComponent.seeProf()" 
                                                  *ngIf="imageService.selectedImage.imagePath, else defaultImage" 
@@ -313,6 +333,7 @@
                                 </div>
                                 </div>
                             </div>
+
                             <div class="hashtags">
                                 <div *ngFor="let hashtag of showAround.Hashtags">
                                     <mat-chip-list>

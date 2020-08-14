@@ -9,9 +9,12 @@ import { ListComponent } from 'src/app/components/list/list.component';
 
 import { Incise } from 'src/app/models/incise';
 import { Scrwm } from 'src/app/models/scrwm';
+import { ImageInc } from 'src/app/models/image-inc';
 
 import {MatDialog} from '@angular/material/dialog';
 import * as moment from 'moment'; 
+
+import { ImageIncService } from 'src/app/services/image-inc.service';
 
 declare var M: any;
 
@@ -25,7 +28,8 @@ export class TasksComponent implements OnInit {
   panelOpenState = false;
   taskList: Scrwm[];
   UserId = sessionStorage.getItem('currentUserId');
-
+  dragged: Incise;
+ 
   constructor(
     public inciseService: InciseService,
     public authService: AuthService,
@@ -35,13 +39,19 @@ export class TasksComponent implements OnInit {
   ){}
 
   ngOnInit(): void { 
-    this.showAround.setByDefectInc();
+    if(localStorage.getItem('byDefectIncise')){
+      this.showAround.setByDefectInc();
+    }
   }
 
   procesaPropagar(event: any){
     this.taskList = event
   }
-  
+
+  drag(incise: Incise){
+    this.dragged = incise;
+  }
+
   lastEdited(updatedAt: string){
     return moment(updatedAt).startOf('hour').fromNow();
   }
@@ -68,12 +78,10 @@ export class TasksComponent implements OnInit {
     }
   }
 
-  openDialogNewScrwm(){
-    this.inciseService.selectedIncise = new Incise;
-    const dialogRef = this.dialog.open(DialogNewScrwm);
-    dialogRef.afterClosed().subscribe(res => {
-      this.list.getList();
-    });
+  OpendialogDelInc(incise: Incise){
+    this.inciseService.selectedIncise = incise;
+    const dialogRef = this.dialog.open(DialogDelInc);
+    dialogRef.afterClosed().subscribe();
   }
 
 }
@@ -110,16 +118,29 @@ export class DialogHeader{
   selector: 'dialog-new-scrwm',
   templateUrl: 'dialog-new-scrwm.html',
 })
-export class DialogNewScrwm {
+export class DialogNewScrwm{
 
-  constructor(public inciseService: InciseService, 
-              public showAround: ShowAroundComponent,
-              public list: ListComponent,
-              public taskComponent: TasksComponent,
+  constructor(
+    public inciseService: InciseService, 
+    public list: ListComponent,
+    public dialog: MatDialog,
   ){ }
 
+  openDialogNewScrwm(){
+    if(this.inciseService.selectedIncise._id){
+      this.inciseService.putIncise(this.inciseService.selectedIncise).subscribe(res => {
+      });  
+    }
+    let C = new Incise;
+    this.inciseService.postIncise(C).subscribe(res => {
+      this.inciseService.selectedIncise = res as Incise;
+      const dialogRef = this.dialog.open(DialogNewScrwm);
+      dialogRef.afterClosed().subscribe();      
+    })
+  }
+
   newIncise(form: NgForm){
-    const incise = new Incise;
+    const incise = this.inciseService.selectedIncise;
     incise.title = form.value.title;
     incise.subtitle = form.value.subtitle;
     incise.prof = sessionStorage.getItem('currentUserId');
@@ -129,9 +150,98 @@ export class DialogNewScrwm {
       incise.publicity = false;
     }
     this.inciseService.postIncise(incise).subscribe(res => {
-      this.list.getList();
-      window.location.reload();
+      this.inciseService.getIncises().subscribe(res => {
+        this.inciseService.incises = res as Incise[];
+        this.list.getList();
+        window.location.reload();
+        })
     });
+  }
+
+}
+
+
+@Component({
+  selector: 'dialog-del-inc',
+  templateUrl: 'dialog-del-inc.html',
+})
+export class DialogDelInc{
+
+  constructor(
+    public inciseService: InciseService, 
+    public showAround: ShowAroundComponent,
+    public imageIncService: ImageIncService,
+    public list: ListComponent,
+  ){ }
+
+  deleteIncise(){
+    let C = this.inciseService.selectedIncise;
+    this.delIncise(C);
+    document.getElementById('E').textContent = "";
+    const D = new Incise;
+    this.showAround.toCenter(D);
+    this.list.getList();
+    window.location.reload();
+  }
+
+  delIncise(C: Incise){
+    this.inciseService.deleteIncise(C._id).subscribe();
+    console.log("antes de removeLink")
+    this.removeLinks(C._id);
+    if(C.media){ 
+      this.delImage(C);
+    };
+  }
+
+  removeLinks(id: string){
+    console.log(id)
+    this.inciseService.getIncises().subscribe(res =>{
+      let C = res as Incise[];
+      for(var i in C){
+        var z = 0
+        if(C[i].up.indexOf(id) != -1){
+          C[i].up.splice(C[i].up.indexOf(id), 1);
+          z ++;
+        }
+        if(C[i].down.indexOf(id) != -1){
+          C[i].down.splice(C[i].down.indexOf(id), 1);
+          z ++;
+        }
+        if(C[i].right.indexOf(id) != -1){
+          C[i].right.splice(C[i].right.indexOf(id), 1);
+          z ++;
+        }
+        for(var j in C[i].left){
+          if(C[i].left[j].IdComm === id){
+            const index = C[i].left.indexOf(C[i].left[j])
+            C[i].left.splice(index, 1);
+            z ++;
+          }
+        }
+        if(C[i].after === id){
+          C[i].after = "";
+          z ++;
+        }
+        if(C[i].before === id){
+          C[i].before = "";
+          z ++;
+        }
+        if(z > 0){
+          this.inciseService.putIncise(C[i]).subscribe();  
+        }
+      }
+    });
+  }
+
+  delImage(C: Incise){
+    this.imageIncService.getImages().subscribe(res => {
+      let I = res as ImageInc;
+      for(var i in I){
+        if(I[i].imagePath === C.media){
+          this.imageIncService.deleteImage(I[i]._id).subscribe();
+        }
+      }
+    })
   }
 
 }

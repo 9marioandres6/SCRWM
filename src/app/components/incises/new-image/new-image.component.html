@@ -8,9 +8,12 @@
   </label>  
   <input type="file" style="display:none" (change)="onPhotoSelected($event)" #photoInput/>
   
-  <div>
-    <button mat-button [mat-dialog-close]="true">Back</button>
-    <button mat-button mat-dialog-close (click)="insertImageInc()" >Insert</button>
+  <div class="buttons">
+    <div>
+      <button mat-button [mat-dialog-close]="true">Back</button>
+      <button mat-button mat-dialog-close (click)="insertImageInc()" >Insert</button>
+    </div>
+    <button mat-button mat-dialog-close (click)="removeImage()" *ngIf="showAround.ImageIncPath">Remove</button>
   </div>
   
 </mat-dialog-content>

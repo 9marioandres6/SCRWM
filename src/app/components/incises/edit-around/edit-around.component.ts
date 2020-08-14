@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InciseService } from 'src/app/services/incise.service';
 import { ShowAroundComponent } from 'src/app/components/incises/show-around/show-around.component'
+import { DialogDelInc } from 'src/app/components/tasks/tasks.component'
 import { Incise } from 'src/app/models/incise';
 import { Comm } from 'src/app/models/comm';
 
@@ -14,10 +15,12 @@ export class EditAroundComponent implements OnInit {
   newInc: Incise;
   oldInc: Incise;
   dir: string;
+  Sel: Incise;
 
   constructor(
-    public inciseService: InciseService, 
-    public showAround: ShowAroundComponent,
+    private inciseService: InciseService, 
+    private showAround: ShowAroundComponent,
+    private delInc: DialogDelInc,
   ){ }
 
   ngOnInit(): void {
@@ -56,7 +59,7 @@ export class EditAroundComponent implements OnInit {
     this.playAudio();
     const E = document.getElementById('E');
     if(E.textContent === "" && this.oldInc.content === "" && !this.oldInc.media){
-      this.inciseService.deleteIncise(this.oldInc._id).subscribe();
+      this.delInc.delIncise(this.oldInc);
       this.showAround.toCenter(this.newInc);
       return;
     }
@@ -203,7 +206,12 @@ export class EditAroundComponent implements OnInit {
   linkStereo3(){
     this.inciseService.putIncise(this.newInc).subscribe(res => {
       res as Incise;
-      this.showAround.toCenter(this.newInc);
+      if(this.Sel){
+        this.showAround.toCenter(this.Sel);
+        this.Sel = new Incise;
+      } else {
+        this.showAround.toCenter(this.newInc);
+      }
     })
   }
 

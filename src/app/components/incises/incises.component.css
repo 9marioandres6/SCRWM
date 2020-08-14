@@ -478,3 +478,32 @@
 }
 
 
+.landing{
+  position: relative;
+  top: -15%;
+  left: -110%;
+  height: 450px;
+  font-size: xx-large;
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+}
+
+.innerLanding{
+  height: 400px;
+  width: 400px;
+}
+
+.link{
+  height: 15px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  opacity: 0.1;
+  transition: opacity 0.5s;
+}
+
+.link:hover{
+  opacity: 1;
+}
