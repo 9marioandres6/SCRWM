@@ -87,7 +87,6 @@
              
                 <div class="center">
                     <div class="cab">
-
                         <ng-container *ngIf="authService.loggedIn()">
                             <div class="ttpBefore" *ngIf="inciseService.selectedIncise.before != ''">
                                 <img class="z-axis" (click)="editAround.setBefore()" src="assets/undo.png" >
@@ -308,18 +307,19 @@
              
                 <div class="center">
                     <div class="cab">
-                        <div class="ttpBefore" *ngIf="inciseService.selectedIncise.before != ''">
-                            <img class="z-axis" (click)="editAround.setBefore()" src="assets/undo.png" >
-                            <span class="ttpTextBefore"> Previous </span>
-                        </div>
-                        <div class="ttpAfter" *ngIf="inciseService.selectedIncise.after != ''">
-                            <img class="z-axis" (click)="editAround.setAfter()" src="assets/redo.png">
-                            <span class="ttpTextAfter"> E </span>
-                        </div>
                         <ng-container *ngIf="authService.loggedIn()">
+                            <div class="ttpBefore" *ngIf="inciseService.selectedIncise.before != ''">
+                                <img class="z-axis" (click)="editAround.setBefore()" src="assets/undo.png" >
+                                <span class="ttpTextBefore"> Previous </span>
+                            </div>
+                            <div class="ttpAfter" *ngIf="inciseService.selectedIncise.after != ''">
+                                <img class="z-axis" (click)="editAround.setAfter()" src="assets/redo.png">
+                                <span class="ttpTextAfter"> Edited </span>
+                            </div>                              <img class="anchor" id="anchor" src="assets/anchor.png" (mouseup)="anchorSelected()">
                             <img class="diamond" id="diamond" src="assets/diamond.png" (mouseup)="diamondSelected()">
                             <div class="followers">{{ inciseService.selectedIncise.diamond }} </div>    
-                            <img class="anchor" id="anchor" src="assets/anchor.png" (mouseup)="anchorSelected()">
+                            <img class="ojo" id="ojo" src="assets/vista.png">
+                            <div class="vistas">{{ inciseService.selectedIncise.vistas }} </div>  
                             <div class="ttpName">
                             <img class="circulo" (click)="profileComponent.seeProf()" 
                                                  *ngIf="imageService.selectedImage.imagePath, else defaultImage" 
@@ -333,6 +333,7 @@
                                 </div>
                                 </div>
                             </div>
+
                             <div class="hashtags">
                                 <div *ngFor="let hashtag of showAround.Hashtags">
                                     <mat-chip-list>

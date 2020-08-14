@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd, NavigationStart } from '@angular/router';
 
 import { InciseService } from 'src/app/services/incise.service';
 import { ProfService } from 'src/app/services/prof.service';
@@ -48,7 +48,7 @@ export class IncisesComponent implements OnInit{
     public dialog: MatDialog,
     public router: Router,
     private route: ActivatedRoute,
-  ){ route.params.subscribe(val => this.ngOnInit()) }
+  ){route.params.subscribe(val => this.ngOnInit()); }
 
   ngOnInit(): void{
   }  
@@ -106,15 +106,15 @@ export class IncisesComponent implements OnInit{
   zoomMin(){
     this.router.navigate(['']);
     this.inciseService.selectedIncise.content = document.getElementById('E').textContent;
-    this.showAround.toCenter(this.inciseService.selectedIncise);
+    setTimeout( e => {this.showAround.toCenter(this.inciseService.selectedIncise)}, 100);
   }
 
   zoomMax(){
+    //this.deleteIncises();
     if(this.authService.loggedIn()){
-      this.router.navigate(['/incises']);
+      this.router.navigate(['/incises'])
       this.inciseService.selectedIncise.content = document.getElementById('E').textContent;
-      this.showAround.toCenter(this.inciseService.selectedIncise); 
-      //this.deleteIncises(); 
+      setTimeout( e => {this.showAround.toCenter(this.inciseService.selectedIncise)}, 100);
     }
   }
 
