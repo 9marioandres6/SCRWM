@@ -70,26 +70,27 @@ export class ShowAroundComponent implements OnInit {
   }
 
   saveLast(incise: Incise){
-    let C = this.inciseService.selectedIncise
+    let C = this.inciseService.selectedIncise;
     if(C._id){
       C.content = document.getElementById('E').textContent;
       this.inciseService.putIncise(C).subscribe();
+      this.profService.putProf(this.profService.userProf)
     }
     this.toCenter(incise)
   }
 
   toCenter(incise: Incise){
+    this.resetConstants();
     localStorage.setItem('byDefectIncise', incise._id);
     this.inciseService.selectedIncise = incise;
-    this.isEditable(incise);
+    this.showAround(incise);
     this.setVistas(incise);
-    this.resetConstants();
     this.setImageInc(incise);
     this.setDiamond(incise);
     this.setAnchor(incise);
     this.setImage(incise);
     this.showHashtag(incise);
-    this.showAround(incise);
+    this.isEditable(incise);
   }
 
   setVistas(incise: Incise){

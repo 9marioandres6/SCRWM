@@ -479,6 +479,9 @@
 
 
 .landing{
+  position: relative;
+  top: -15%;
+  left: -110%;
   height: 450px;
   font-size: xx-large;
   display: flex;
@@ -487,8 +490,8 @@
 }
 
 .innerLanding{
-  height: 300px;
-  width: 350px;
+  height: 400px;
+  width: 400px;
 }
 
 .link{

@@ -208,6 +208,7 @@ export class EditAroundComponent implements OnInit {
       res as Incise;
       if(this.Sel){
         this.showAround.toCenter(this.Sel);
+        this.Sel = new Incise;
       } else {
         this.showAround.toCenter(this.newInc);
       }

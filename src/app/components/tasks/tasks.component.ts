@@ -29,7 +29,7 @@ export class TasksComponent implements OnInit {
   taskList: Scrwm[];
   UserId = sessionStorage.getItem('currentUserId');
   dragged: Incise;
-
+ 
   constructor(
     public inciseService: InciseService,
     public authService: AuthService,
@@ -39,7 +39,9 @@ export class TasksComponent implements OnInit {
   ){}
 
   ngOnInit(): void { 
-    this.showAround.setByDefectInc();
+    if(localStorage.getItem('byDefectIncise')){
+      this.showAround.setByDefectInc();
+    }
   }
 
   procesaPropagar(event: any){

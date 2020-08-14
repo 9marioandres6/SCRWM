@@ -1,7 +1,7 @@
 <div *ngIf="router.url === '/'; else maxIncise">
     <span>
         <div class="bloqueMin">
-            <div class="bloqueMin2" *ngIf="inciseService.selectedIncise._id, else landing">
+            <div class="bloqueMin2">
 
                 <div></div>
 
@@ -130,8 +130,14 @@
                         </div>
                         <ng-container *ngIf="showAround.ImageIncPath">
                             <img class="media" [src]="inciseService.env + showAround.ImageIncPath">
-                        </ng-container>    
-                    </div> 
+                        </ng-container>
+                    </div>
+                </div>
+
+                <div *ngIf="!inciseService.selectedIncise._id">
+                    <div class="landing">
+                        <img class="innerLanding" src="assets/landing.png" alt="">
+                    </div>
                 </div>
 
                 <div class="Derecha" (dragover)="allowDrop($event)"
@@ -215,11 +221,6 @@
                 </div> 
 
             </div>
-            <ng-template #landing>
-                <div class="landing">
-                    <img class="innerLanding" src="assets/landing.png" alt="">
-                </div>
-            </ng-template>
         </div>    
     </span>
 </div>
