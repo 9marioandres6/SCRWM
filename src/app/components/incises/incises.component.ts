@@ -53,7 +53,6 @@ export class IncisesComponent implements OnInit{
   }  
   
   @HostListener("window:keydown", ['$event']) spaceEvent(event: any){
-    console.log("DDDDDDd");
     this.keyListener.readKey(event);
   }
 
