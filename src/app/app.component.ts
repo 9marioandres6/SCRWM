@@ -19,15 +19,17 @@ export class AppComponent{
     ){
       let path = localStorage.getItem('path');
       if(path){
-        console.log(path)
-        this.router.navigate([path]);
+        console.log("constructor. path: ", path)
+        const Path = path.slice(1,8)
+        console.log("constructor. Path: ", Path)
+        this.router.navigate([Path]);
         this.showAround.deepLink(path);
         localStorage.removeItem('path');
       } 
     }
   
   changeOfRoutes(){
-    console.log('chageOfRutes')
+    console.log('chageOfRutes. this.router.url: ', this.router.url)
     this.showAround.deepLink(this.router.url);
     const userId = sessionStorage.getItem('currentUserId');
     this.socketService.emit('new user', userId);
