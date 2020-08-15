@@ -9,6 +9,9 @@ import { AppComponent } from '../app.component';
 import { AuthGuard } from '../auth.guard';
 import { TokenInterceptorService } from './token-interceptor.service';
 
+//import { AngularFireModule } from '@angular/fire';
+//import { AngularFireStorageModule, BUCKET } from '@angular/fire/storage'
+
 import { IncisesComponent, DialogContent } from '../components/incises/incises.component';
 import { SignupComponent } from '../components/signup/signup.component';
 import { SigninComponent } from '../components/signin/signin.component';
@@ -16,7 +19,6 @@ import { TasksComponent, DialogHeader, DialogNewScrwm, DialogDelInc } from '../c
 import { InitComponent } from '../components/init/init.component';
 import { ShowAroundComponent } from '../components/incises/show-around/show-around.component';
 import { EditAroundComponent } from '../components/incises/edit-around/edit-around.component';
-import { CopyUrlComponent } from '../components/incises/copy-url/copy-url.component';
 import { NewImageComponent } from '../components/incises/new-image/new-image.component';
 import { KeyListenerComponent } from '../components/incises/key-listener/key-listener.component';
 import { ProfComponent } from '../components/prof/prof.component'
@@ -45,7 +47,6 @@ import { ListComponent } from 'src/app/components/list/list.component';
     ProfileComponent,
     ListComponent,
     DialogDelInc,
-    CopyUrlComponent, 
     NewImageComponent,
     ],
   imports: [
@@ -56,6 +57,8 @@ import { ListComponent } from 'src/app/components/list/list.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
+    //AngularFireModule,
+    //AngularFireStorageModule,
   ],
   providers: [
     AuthGuard,
@@ -71,7 +74,6 @@ import { ListComponent } from 'src/app/components/list/list.component';
     SigninComponent,
     ProfComponent,
     ProfileComponent,
-    CopyUrlComponent,
     InitComponent,
     TestingComponent,
     DialogDelInc,
@@ -82,7 +84,11 @@ import { ListComponent } from 'src/app/components/list/list.component';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
-    }
+    },
+    /*{
+      provide: BUCKET,
+      useValue: 'gs://scrwm-f8e67.appspot.com/'
+    }*/
   ],
   bootstrap: [AppComponent],
   exports: [ChatComponent]

@@ -31,7 +31,7 @@
                                 {{ lastEdited(task.incise.updatedAt) }} (cr. {{ created(task.incise.createdAt) }} )
                             </div>
                             <div class="puntos">
-                                <i class="material-icons" style="color: brown;" (click)="OpendialogDelInc(task.incise)">delete</i>
+                                <i class="material-icons" style="color: brown;" (click)="OpendialogDelInc(task.incise)" *ngIf="task.prof.userId === UserId ">delete</i>
                                 <p class="vistas">{{ task.incise.vistas }} </p> 
                                 <img class="ojo" id="ojo" src="assets/vista.png">
                                 <p class="followers">{{ task.incise.diamond }} </p>    

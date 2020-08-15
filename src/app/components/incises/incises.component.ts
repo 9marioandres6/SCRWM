@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd, NavigationStart } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { InciseService } from 'src/app/services/incise.service';
 import { ProfService } from 'src/app/services/prof.service';
@@ -11,7 +11,6 @@ import { SocketService } from 'src/app/services/socket.service';
 import { EditAroundComponent } from 'src/app/components/incises/edit-around/edit-around.component';
 import { ShowAroundComponent } from 'src/app/components/incises/show-around/show-around.component';
 import { KeyListenerComponent } from 'src/app/components/incises/key-listener/key-listener.component';
-import { CopyUrlComponent } from 'src/app/components/incises/copy-url/copy-url.component';
 import { NewImageComponent } from 'src/app/components/incises/new-image/new-image.component';
 import { ProfileComponent } from 'src/app/components/profile/profile.component';
 import { TasksComponent } from 'src/app/components/tasks/tasks.component';
@@ -54,14 +53,9 @@ export class IncisesComponent implements OnInit{
   }  
   
   @HostListener("window:keydown", ['$event']) spaceEvent(event: any){
+    console.log("DDDDDDd");
     this.keyListener.readKey(event);
   }
-
-  toBase64(){
-    const img = this.inciseService.env + this.showAround.ImageIncPath;
-    console.log(img);
-  }
-
 
   allowDrop(event: any){
     event.preventDefault();
@@ -110,17 +104,17 @@ export class IncisesComponent implements OnInit{
   }
 
   zoomMin(){
-    this.router.navigate(['']);
     this.inciseService.selectedIncise.content = document.getElementById('E').textContent;
-    setTimeout( e => {this.showAround.toCenter(this.inciseService.selectedIncise)}, 100);
+    this.router.navigate(['']);
+    setTimeout( e => {this.showAround.toCenter(this.inciseService.selectedIncise)}, 10);
   }
 
   zoomMax(){
     //this.deleteIncises();
     if(this.authService.loggedIn()){
-      this.router.navigate(['/incises'])
       this.inciseService.selectedIncise.content = document.getElementById('E').textContent;
-      setTimeout( e => {this.showAround.toCenter(this.inciseService.selectedIncise)}, 100);
+      this.router.navigate(['/incises'])
+      setTimeout( e => {this.showAround.toCenter(this.inciseService.selectedIncise)}, 10);
     }
   }
 
@@ -225,15 +219,6 @@ export class IncisesComponent implements OnInit{
     } else {
       M.toast({html: "No incise being edited"})
 
-    }
-  }
-
-  onenDialogCopyUrl(){
-    if(this.inciseService.selectedIncise._id){
-      const dialogRef = this.dialog.open(CopyUrlComponent);
-      dialogRef.afterClosed().subscribe();  
-    } else {
-      M.toast({html: "Please select a Scrwm from the lateral right panel"})
     }
   }
 }

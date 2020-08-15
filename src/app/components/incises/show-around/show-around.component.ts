@@ -4,6 +4,7 @@ import { InciseService } from 'src/app/services/incise.service';
 import { ProfService } from 'src/app/services/prof.service';
 import { ImageService } from 'src/app/services/image.service';
 import { ImageIncService } from 'src/app/services/image-inc.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 import { Incise } from 'src/app/models/incise';
 import { Image } from 'src/app/models/image';
@@ -31,6 +32,7 @@ export class ShowAroundComponent implements OnInit {
     public imageService: ImageService,
     public imageIncService: ImageIncService,
     public testing: TestingComponent,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -42,6 +44,8 @@ export class ShowAroundComponent implements OnInit {
         const A = this.inciseService.incises = res as Incise[];
         for(var i in A){
           if(A[i]._id === url.slice(9)){
+            console.log(A[i]);
+            console.log("deepLinkSuccessful");
             this.toCenter(A[i]);
           }
         }
@@ -84,13 +88,15 @@ export class ShowAroundComponent implements OnInit {
     localStorage.setItem('byDefectIncise', incise._id);
     this.inciseService.selectedIncise = incise;
     this.showAround(incise);
-    this.setVistas(incise);
     this.setImageInc(incise);
-    this.setDiamond(incise);
-    this.setAnchor(incise);
     this.setImage(incise);
     this.showHashtag(incise);
     this.isEditable(incise);
+    if(this.authService.loggedIn()){
+      this.setDiamond(incise);
+      this.setVistas(incise);
+      this.setAnchor(incise);
+    }
   }
 
   setVistas(incise: Incise){

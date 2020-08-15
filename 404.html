@@ -1,6 +1,7 @@
 <script>
-    console.log("...entra al 404")
+    console.log("404");
     const path = window.location.pathname.slice(1);
+    console.log(path);
     localStorage.setItem('path', path);
-    window.location.href='../SCRWM';
+    setTimeout( e => {window.location.href='../SCRWM'}, 100);
 </script>

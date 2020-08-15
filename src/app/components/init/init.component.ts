@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from 'src/app/services/auth.service';
 import { ImageService } from 'src/app/services/image.service';
+import { InciseService } from 'src/app/services/incise.service';
 
 import { User } from 'src/app/models/user';
 import { Image } from 'src/app/models/image';
@@ -36,6 +37,7 @@ export class InitComponent implements OnInit {
   constructor(
     private imageService: ImageService,
     public authService: AuthService,
+    public inciseService: InciseService,
     public dialog: MatDialog,
     private signupComponent: SignupComponent,
     private signinComponent: SigninComponent,
@@ -84,6 +86,10 @@ export class InitComponent implements OnInit {
     });
   }
  
+  urlToast(){
+    M.toast({html: "URL copied to clipboard"})
+  }
+
 }
 
 

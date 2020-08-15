@@ -1,9 +1,9 @@
 <mat-dialog-content class="mat-typography">
 
   <label for="file-input">
-    <img class="imageInc" (click)="photoInput.click()" [src]="photoSel || imageIncPath">
+    <img class="imageInc" crossorigin="anonymous" (click)="photoInput.click()" [src]="photoSel || imageIncPath">
     <ng-template #uploadPhoto>
-      <img class="imageInc" [src]="photoSel || 'assets/image.png' " (click)="photoInput.click()"/>
+      <img class="imageInc" crossorigin="anonymous" [src]="photoSel || 'assets/image.png' " (click)="photoInput.click()"/>
     </ng-template>
   </label>  
   <input type="file" style="display:none" (change)="onPhotoSelected($event)" #photoInput/>

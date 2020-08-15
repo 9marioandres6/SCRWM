@@ -62,7 +62,7 @@ export class TasksComponent implements OnInit {
 
   openDialogHeader(){
     let C = this.inciseService.selectedIncise;
-    if(C.prof !== sessionStorage.getItem('currentUserId')){
+    if(C.prof !== this.UserId){
         M.toast({html: "You can only edit headers of your own incises"});
     } else {
       if(!C._id){
@@ -83,7 +83,6 @@ export class TasksComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogDelInc);
     dialogRef.afterClosed().subscribe();
   }
-
 }
 
 
@@ -149,7 +148,7 @@ export class DialogNewScrwm{
     } else if(form.value.publicity === false) {
       incise.publicity = false;
     }
-    this.inciseService.postIncise(incise).subscribe(res => {
+    this.inciseService.putIncise(incise).subscribe(res => {
       this.inciseService.getIncises().subscribe(res => {
         this.inciseService.incises = res as Incise[];
         this.list.getList();
@@ -186,7 +185,6 @@ export class DialogDelInc{
 
   delIncise(C: Incise){
     this.inciseService.deleteIncise(C._id).subscribe();
-    console.log("antes de removeLink")
     this.removeLinks(C._id);
     if(C.media){ 
       this.delImage(C);
@@ -194,7 +192,6 @@ export class DialogDelInc{
   }
 
   removeLinks(id: string){
-    console.log(id)
     this.inciseService.getIncises().subscribe(res =>{
       let C = res as Incise[];
       for(var i in C){
