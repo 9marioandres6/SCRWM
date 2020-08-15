@@ -18,7 +18,6 @@ export class AppComponent{
     private router: Router,
     ){
       let path = localStorage.getItem('path');
-      console.log('llega...')
       if(path){
         console.log(path)
         this.router.navigate([path]);
