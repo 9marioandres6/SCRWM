@@ -17,13 +17,13 @@ export class AppComponent{
     public socketService: SocketService,
     private router: Router,
     ){
-      let path = localStorage.getItem('path');
+     /* let path = localStorage.getItem('path');
       if(path){
         console.log(path)
         this.router.navigate([path]);
         this.showAround.deepLink(path);
         localStorage.removeItem('path');
-      }
+      }*/
     }
   
   changeOfRoutes(){
