@@ -87,20 +87,22 @@
              
                 <div class="center">
                     <div class="cab">
+                        <div class="ttpBefore" *ngIf="inciseService.selectedIncise.before != ''">
+                            <img class="z-axis" (click)="editAround.setBefore()" src="assets/undo.png" >
+                            <span class="ttpTextBefore"> Previous </span>
+                        </div>
+                        <div class="ttpAfter" *ngIf="inciseService.selectedIncise.after != ''">
+                            <img class="z-axis" (click)="editAround.setAfter()" src="assets/redo.png">
+                            <span class="ttpTextAfter"> Edited </span>
+                        </div>                              
                         <ng-container *ngIf="authService.loggedIn()">
-                            <div class="ttpBefore" *ngIf="inciseService.selectedIncise.before != ''">
-                                <img class="z-axis" (click)="editAround.setBefore()" src="assets/undo.png" >
-                                <span class="ttpTextBefore"> Previous </span>
-                            </div>
-                            <div class="ttpAfter" *ngIf="inciseService.selectedIncise.after != ''">
-                                <img class="z-axis" (click)="editAround.setAfter()" src="assets/redo.png">
-                                <span class="ttpTextAfter"> Edited </span>
-                            </div>                              <img class="anchor" id="anchor" src="assets/anchor.png" (mouseup)="anchorSelected()">
+                            <img class="anchor" id="anchor" src="assets/anchor.png" (mouseup)="anchorSelected()">
                             <img class="diamond" id="diamond" src="assets/diamond.png" (mouseup)="diamondSelected()">
                             <div class="followers">{{ inciseService.selectedIncise.diamond }} </div>    
                             <img class="ojo" id="ojo" src="assets/vista.png">
-                            <div class="vistas">{{ inciseService.selectedIncise.vistas }} </div>  
-                            <div class="ttpName">
+                            <div class="vistas">{{ inciseService.selectedIncise.vistas }} </div> 
+                        </ng-container>       
+                        <div class="ttpName">
                             <img class="circulo" (click)="profileComponent.seeProf()" 
                                                  *ngIf="imageService.selectedImage.imagePath, else defaultImage" 
                                                  [src]="inciseService.env + imageService.selectedImage.imagePath">
@@ -111,24 +113,22 @@
                                 <div *ngIf="prof.userId === inciseService.selectedIncise.prof && prof.nickname">
                                     <span class="ttpTextName"> @{{ prof.nickname }} </span>
                                 </div>
-                                </div>
                             </div>
-
-                            <div class="hashtags">
-                                <div *ngFor="let hashtag of showAround.Hashtags">
-                                    <mat-chip-list>
-                                        <mat-chip (click)="openDialogDelHashtag(hashtag)">#{{ hashtag }}</mat-chip>
-                                    </mat-chip-list>
-                                </div>
+                        </div>
+                        <div class="hashtags">
+                            <div *ngFor="let hashtag of showAround.Hashtags">
+                                <mat-chip-list>
+                                    <mat-chip (click)="openDialogDelHashtag(hashtag)">#{{ hashtag }}</mat-chip>
+                                </mat-chip-list>
                             </div>
-                        </ng-container>  
+                        </div>
                     </div>
                     <div class="CeditableMin">
                         <div id="E">
                             <div></div>
                         </div>
                         <ng-container *ngIf="showAround.ImageIncPath">
-                            <img class="media" [src]="inciseService.env + showAround.ImageIncPath">
+                            <img class="media" id="media" [src]="inciseService.env + showAround.ImageIncPath">
                         </ng-container>
                     </div>
                 </div>
@@ -209,16 +209,11 @@
                         </div>    
                     </div>
                 </div>
-
-                <div class="ttpBtn">
-                    <ng-container *ngIf="authService.loggedIn()">
-                        <button class="btn btn-primary" (click)="zoomMax()" >
-                            <i class="material-icons">fullscreen</i>
-                        </button>
-                        <span class="ttpTextBtn">fullscreen</span>
-                    </ng-container>
-                </div> 
-
+                <ng-container *ngIf="authService.loggedIn()">
+                    <button class="btn btn-primary" (click)="zoomMax()" >
+                        <i class="material-icons">fullscreen</i>
+                    </button>
+                </ng-container>                    
             </div>
         </div>    
     </span>
@@ -307,20 +302,22 @@
              
                 <div class="center">
                     <div class="cab">
+                        <div class="ttpBefore" *ngIf="inciseService.selectedIncise.before != ''">
+                            <img class="z-axis" (click)="editAround.setBefore()" src="assets/undo.png" >
+                            <span class="ttpTextBefore"> Previous </span>
+                        </div>
+                        <div class="ttpAfter" *ngIf="inciseService.selectedIncise.after != ''">
+                            <img class="z-axis" (click)="editAround.setAfter()" src="assets/redo.png">
+                            <span class="ttpTextAfter"> Edited </span>
+                        </div>                              
                         <ng-container *ngIf="authService.loggedIn()">
-                            <div class="ttpBefore" *ngIf="inciseService.selectedIncise.before != ''">
-                                <img class="z-axis" (click)="editAround.setBefore()" src="assets/undo.png" >
-                                <span class="ttpTextBefore"> Previous </span>
-                            </div>
-                            <div class="ttpAfter" *ngIf="inciseService.selectedIncise.after != ''">
-                                <img class="z-axis" (click)="editAround.setAfter()" src="assets/redo.png">
-                                <span class="ttpTextAfter"> Edited </span>
-                            </div>                              <img class="anchor" id="anchor" src="assets/anchor.png" (mouseup)="anchorSelected()">
+                            <img class="anchor" id="anchor" src="assets/anchor.png" (mouseup)="anchorSelected()">
                             <img class="diamond" id="diamond" src="assets/diamond.png" (mouseup)="diamondSelected()">
                             <div class="followers">{{ inciseService.selectedIncise.diamond }} </div>    
                             <img class="ojo" id="ojo" src="assets/vista.png">
-                            <div class="vistas">{{ inciseService.selectedIncise.vistas }} </div>  
-                            <div class="ttpName">
+                            <div class="vistas">{{ inciseService.selectedIncise.vistas }} </div> 
+                        </ng-container>       
+                        <div class="ttpName">
                             <img class="circulo" (click)="profileComponent.seeProf()" 
                                                  *ngIf="imageService.selectedImage.imagePath, else defaultImage" 
                                                  [src]="inciseService.env + imageService.selectedImage.imagePath">
@@ -331,17 +328,15 @@
                                 <div *ngIf="prof.userId === inciseService.selectedIncise.prof && prof.nickname">
                                     <span class="ttpTextName"> @{{ prof.nickname }} </span>
                                 </div>
-                                </div>
                             </div>
-
-                            <div class="hashtags">
-                                <div *ngFor="let hashtag of showAround.Hashtags">
-                                    <mat-chip-list>
-                                        <mat-chip (click)="openDialogDelHashtag(hashtag)">#{{ hashtag }}</mat-chip>
-                                    </mat-chip-list>
-                                </div>
+                        </div>
+                        <div class="hashtags">
+                            <div *ngFor="let hashtag of showAround.Hashtags">
+                                <mat-chip-list>
+                                    <mat-chip (click)="openDialogDelHashtag(hashtag)">#{{ hashtag }}</mat-chip>
+                                </mat-chip-list>
                             </div>
-                        </ng-container>  
+                        </div>
                     </div>
                     <div class="CeditableMax">
                         <div id="E"></div>
@@ -415,14 +410,9 @@
                         </div>    
                     </div>
                 </div>
-
-                <div class="ttpBtn">
-                    <button class="btn btn-primary" (click)="zoomMin()">
-                        <i class="material-icons">fullscreen</i>
-                    </button>
-                    <span class="ttpTextBtn">exit fullscreen</span>
-                </div> 
-                
+                <button class="btn btn-primary" (click)="zoomMin()">
+                    <i class="material-icons">fullscreen</i>
+                </button>
             </div>
         </div>    
     </span>

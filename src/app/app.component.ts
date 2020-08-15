@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { ShowAroundComponent} from 'src/app/components/incises/show-around/show-around.component'
 import { SocketService } from 'src/app/services/socket.service'
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,10 +18,12 @@ export class AppComponent{
     private router: Router,
     ){
       let path = localStorage.getItem('path');
-      if(path) {
-        //localStorage.removeItem('path');
+      console.log('llega...')
+      if(path){
+        console.log(path)
         this.router.navigate([path]);
         this.showAround.deepLink(path);
+        localStorage.removeItem('path');
       }
     }
   

@@ -19,7 +19,13 @@ declare var M: any;
 })
 export class NewImageComponent implements OnInit {
 
-  constructor(public inciseService: InciseService,
+  imageIncPath = this.setImageInc();
+  file: File;
+  photoSel: string | ArrayBuffer;
+  cont: string;
+
+  constructor(
+    public inciseService: InciseService,
     public imageIncService: ImageIncService,
     public showAround: ShowAroundComponent,
     public browserModule: BrowserModule,
@@ -29,8 +35,6 @@ export class NewImageComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  imageIncPath = this.setImageInc();
-  
   setImageInc(){
     if(this.showAround.ImageIncPath){
       return this.inciseService.env + this.showAround.ImageIncPath;
@@ -39,20 +43,28 @@ export class NewImageComponent implements OnInit {
     }
   }
 
-  file: File;
-  photoSel: string | ArrayBuffer;
-
-  onPhotoSelected(event: HTMLInputEvent): void {
+  onPhotoSelected(event: HTMLInputEvent): void{
     if(event.target.files && event.target.files[0]){    // confirma si existe un archivo subido
       this.file = <File>event.target.files[0];          // guarda el archivo en file
       const reader = new FileReader();                   // para que se vea en pantalla
       reader.onload = e => this.photoSel = reader.result;
       reader.readAsDataURL(this.file);
+      this.toCanvas();
     }
+  }
+
+  toCanvas() {
+    const img = <HTMLCanvasElement>document.querySelector('.imageInc');
+    const canvas = document.createElement('canvas');              // Create canvas
+    canvas.width = img.width;
+    canvas.height = img.height;
+    canvas.getContext('2d').drawImage(img, 0, 0);                 // Draw the image
+    const canvasUrl = canvas.toDataURL('image/png');
   }
 
   insertImageInc(){
     if(this.photoSel){
+      this.cont = document.getElementById('E').textContent;
       this.imageIncService.getImages().subscribe(res => {
         const A = this.imageIncService.imagesInc = res as ImageInc[];
         for(var i in A){
@@ -80,6 +92,7 @@ export class NewImageComponent implements OnInit {
       for(var i in A){
         if(A[i].associatedIncId = this.inciseService.selectedIncise._id){
           this.imageIncService.selectedImageInc = A[i];
+          this.inciseService.selectedIncise.content = this.cont;
           this.showAround.toCenter(this.inciseService.selectedIncise);
           return
         }

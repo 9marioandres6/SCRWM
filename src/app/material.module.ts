@@ -10,6 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatCardModule} from '@angular/material/card';
+import {ClipboardModule} from '@angular/cdk/clipboard';
+
 
 @NgModule({
     imports:[
@@ -22,7 +24,8 @@ import {MatCardModule} from '@angular/material/card';
         MatInputModule,
         MatChipsModule,
         MatBadgeModule,
-        MatCardModule
+        MatCardModule,
+        ClipboardModule
     ],
     exports:[
         MatExpansionModule,
@@ -34,7 +37,8 @@ import {MatCardModule} from '@angular/material/card';
         MatInputModule,
         MatChipsModule,
         MatBadgeModule,
-        MatCardModule
+        MatCardModule,
+        ClipboardModule
     ],
     declarations: [],
 })

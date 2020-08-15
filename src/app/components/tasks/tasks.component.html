@@ -20,7 +20,10 @@
                                 </div>  
                             </mat-panel-title>
                             <mat-panel-description draggable="true" (dragstart)="drag(task.incise)" (click)="showAround.saveLast(task.incise)">
-                                <p class="title">{{ task.incise.title }}  </p>
+                                <div class="description">
+                                    <img class="imageTask"  *ngIf="task.incise.media" [src]="inciseService.env + task.incise.media">
+                                    <p class="title">{{ task.incise.title }}  </p>
+                                </div>
                             </mat-panel-description>
                         </mat-expansion-panel-header>
                         <div class="date">
@@ -28,7 +31,7 @@
                                 {{ lastEdited(task.incise.updatedAt) }} (cr. {{ created(task.incise.createdAt) }} )
                             </div>
                             <div class="puntos">
-                                <i class="material-icons" style="color: brown;" (click)="OpendialogDelInc(task.incise)">delete</i>
+                                <i class="material-icons" style="color: brown;" (click)="OpendialogDelInc(task.incise)" *ngIf="task.prof.userId === UserId ">delete</i>
                                 <p class="vistas">{{ task.incise.vistas }} </p> 
                                 <img class="ojo" id="ojo" src="assets/vista.png">
                                 <p class="followers">{{ task.incise.diamond }} </p>    
@@ -57,7 +60,10 @@
                                 </div>  
                             </mat-panel-title>
                             <mat-panel-description draggable="true" (dragstart)="drag(task.incise)" (click)="showAround.toCenter(task.incise)">
-                                <p class="content">{{ task.incise.content }}  </p>
+                                <div class="description">
+                                    <img class="imageTask"  *ngIf="task.incise.media" [src]="inciseService.env + task.incise.media">
+                                    <p class="content">{{ task.incise.content }}  </p>    
+                                </div>
                             </mat-panel-description>
                         </mat-expansion-panel-header>
                         <div class="date">
