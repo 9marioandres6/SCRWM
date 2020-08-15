@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { TasksComponent } from './components/tasks/tasks.component';
 import { IncisesComponent } from './components/incises/incises.component';
 import { InitComponent } from './components/init/init.component';
 

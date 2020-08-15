@@ -45,6 +45,7 @@ export class ShowAroundComponent implements OnInit {
         const A = this.inciseService.incises = res as Incise[];
         for(var i in A){
           if(A[i]._id === url.slice(9)){
+            console.log('successful Deep Link')
             this.toCenter(A[i]);
           }
         }

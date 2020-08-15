@@ -20,7 +20,7 @@ export class AppComponent{
       let path = localStorage.getItem('path');
       if(path){
         console.log("constructor. path: ", path)
-        const Path = path.slice(1,8)
+        const Path = path.slice(0,8)
         console.log("constructor. Path: ", Path)
         this.router.navigate([Path]);
         this.showAround.deepLink(path);
