@@ -39,7 +39,7 @@ export class ShowAroundComponent implements OnInit {
   }
 
   deepLink(url: string){
-    console.log(url);
+    console.log("deepLink. url: ", url);
     if(url.slice(0,9) === "/incises/"){
       this.inciseService.getIncises().subscribe(res => {
         const A = this.inciseService.incises = res as Incise[];

@@ -19,7 +19,7 @@ export class AppComponent{
     ){
       let path = localStorage.getItem('path');
       if(path){
-        console.log(path)
+        console.log("constructor. Path: ", path)
         this.router.navigate([path]);
         this.showAround.deepLink(path);
         localStorage.removeItem('path');
@@ -27,7 +27,7 @@ export class AppComponent{
     }
   
   changeOfRoutes(){
-    console.log('chageOfRutes')
+    console.log('chageOfRutes. this.router.url: ', this.router.url)
     this.showAround.deepLink(this.router.url);
     const userId = sessionStorage.getItem('currentUserId');
     this.socketService.emit('new user', userId);
