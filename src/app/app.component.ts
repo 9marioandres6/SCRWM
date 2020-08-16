@@ -20,8 +20,7 @@ export class AppComponent{
       let path = localStorage.getItem('path');
       if(path){
         console.log("constructor. path: ", path)
-        this.router.navigate(['/incises'])
-        setTimeout( e => {this.showAround.deepLink(path)}, 100);
+        this.showAround.deepLink(path);
         localStorage.removeItem('path');
       } 
     }

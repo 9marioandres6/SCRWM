@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { InciseService } from 'src/app/services/incise.service';
 import { ProfService } from 'src/app/services/prof.service';
@@ -25,6 +26,7 @@ export class ShowAroundComponent implements OnInit {
   Right: any = [];
   Hashtags: any = [];
   ImageIncPath: string = "";
+  @Output() hayId = new EventEmitter<any>();
 
   constructor(
     public inciseService: InciseService,
@@ -33,6 +35,7 @@ export class ShowAroundComponent implements OnInit {
     public imageIncService: ImageIncService,
     public testing: TestingComponent,
     private authService: AuthService,
+    public router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -45,9 +48,10 @@ export class ShowAroundComponent implements OnInit {
         const A = this.inciseService.incises = res as Incise[];
         for(var i in A){
           if(A[i]._id === url.slice(9)){
-            this.inciseService.selectedIncise = A[i];
-            setTimeout( e => {this.toCenter(A[i])}, 100);
-            console.log('successful Deep Link')
+            this.hayId.emit(A[i]);
+            this.toCenter(A[i]);
+            console.log('successful Deep Link');
+            this.router.navigate(['/incises']);
           }
         }
       });
