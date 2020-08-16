@@ -3,7 +3,17 @@
         <div class="bloqueMin">
             <div class="bloqueMin2">
 
-                <div></div>
+                <div class="arribaIzquierda">
+                    <div class="abajito">
+                        <div class="derechita">
+                            <ng-container *ngIf="authService.loggedIn()">
+                                <button class="btn btn-primary" (click)="openDialogNewImageInc()" >
+                                    <i class="material-icons">image</i>
+                                </button>
+                            </ng-container> 
+                        </div>
+                    </div>
+                </div>
 
                 <div class="Arriba" (dragover)="allowDrop($event)"
                                     (dragenter)="dragEnter($event)" 
@@ -124,7 +134,7 @@
                         </div>
                     </div>
                     <div class="CeditableMin">
-                        <div id="E">
+                        <div id="E" translate = false>
                             <div></div>
                         </div>
                         <ng-container *ngIf="showAround.ImageIncPath">
@@ -339,7 +349,7 @@
                         </div>
                     </div>
                     <div class="CeditableMax">
-                        <div id="E"></div>
+                        <div id="E" translate = false></div>
                         <ng-container *ngIf="showAround.ImageIncPath">
                             <img class="media" [src]="inciseService.env + showAround.ImageIncPath">
                         </ng-container>    

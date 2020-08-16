@@ -232,6 +232,22 @@
 
 .CeditableMin{
     height: 320px;
+  }
+
+.arribaIzquierda{
+  display: flex;
+  align-items: flex-end;
+}
+
+.abajito{
+  height: 50px;
+  width: 500px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.derechita{
+  width: 100px;
 }
 
 .CeditableMax{

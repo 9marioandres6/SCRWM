@@ -87,7 +87,12 @@ export class InitComponent implements OnInit {
   }
  
   urlToast(){
-    M.toast({html: "URL copied to clipboard"})
+    if(this.inciseService.selectedIncise._id){
+      M.toast({html: "URL copied to clipboard"});
+    } else {
+      M.toast({html: "Please select the Incise you want to share"});
+
+    }
   }
 
 }

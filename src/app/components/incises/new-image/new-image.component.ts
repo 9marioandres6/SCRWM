@@ -42,7 +42,7 @@ export class NewImageComponent implements OnInit {
       return 'assets/image.png';
     }
   }
-
+  
   onPhotoSelected(event: HTMLInputEvent): void{
     if(event.target.files && event.target.files[0]){    // confirma si existe un archivo subido
       this.file = <File>event.target.files[0];          // guarda el archivo en file
