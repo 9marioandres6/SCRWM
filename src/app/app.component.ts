@@ -21,9 +21,8 @@ export class AppComponent{
     ){
       let path = localStorage.getItem('path');
       if(path){
-        this.showAround.deepLink(path);
+        //this.showAround.deepLink(path);
         localStorage.removeItem('path');
-        window.location.reload();
       }     
     }
 
