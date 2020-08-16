@@ -1,6 +1,6 @@
 <script>
     const path = window.location.pathname.slice(6);
-    console.log("404. path: ", path);
     localStorage.setItem('path', path);
-    setTimeout( e => {window.location.href='../'}, 100);
+    localStorage.setItem('byDefectIncise', path.slice(9));
+    window.location.href='../'
 </script>
