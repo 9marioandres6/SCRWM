@@ -52,16 +52,19 @@ export class NewImageComponent implements OnInit {
       this.toCanvas();
     }
   }
+ 
+  canvasUrl: string;
 
-  toCanvas() {
+  toCanvas(){
     const img = <HTMLCanvasElement>document.querySelector('.imageInc');
-    const canvas = document.createElement('canvas');              // Create canvas
+    const canvas = document.createElement('canvas');
     canvas.width = img.width;
     canvas.height = img.height;
-    canvas.getContext('2d').drawImage(img, 0, 0);                 // Draw the image
-    const canvasUrl = canvas.toDataURL('image/png');
-  }
-
+    canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+    this.canvasUrl = canvas.toDataURL('image/jpg');
+    console.log(this.canvasUrl)
+  } 
+  
   insertImageInc(){
     if(this.photoSel){
       this.cont = document.getElementById('E').textContent;
