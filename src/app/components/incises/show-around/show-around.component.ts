@@ -42,7 +42,6 @@ export class ShowAroundComponent implements OnInit {
   }
 
   deepLink(url: string){
-    console.log("deepLink. url: ", url);
     if(url.slice(0,9) === "/incises/"){
       this.inciseService.getIncises().subscribe(res => {
         const A = this.inciseService.incises = res as Incise[];
@@ -50,8 +49,7 @@ export class ShowAroundComponent implements OnInit {
           if(A[i]._id === url.slice(9)){
             this.hayId.emit(A[i]);
             this.toCenter(A[i]);
-            console.log('successful Deep Link');
-            this.router.navigate(['/incises']);
+            setTimeout( e => {this.router.navigate(['/incises'])}, 5000);
           }
         }
       });
