@@ -56,10 +56,6 @@ export class IncisesComponent implements OnInit{
     this.keyListener.readKey(event);
   }
 
-  procesaHayId(event: any){
-    this.inciseService.selectedIncise = event;
-  }
-
   allowDrop(event: any){
     event.preventDefault();
   }
